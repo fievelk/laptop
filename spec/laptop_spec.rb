@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'byebug'
 
 describe 'Laptop applied to a vagrant box' do
   after do

@@ -4,7 +4,7 @@ require 'net/http'
 module LaptopHelper
   def run_command(command)
    #  Cocaine::CommandLine.new(command, '', :logger => Logger.new(STDOUT)).run
-    Cocaine::CommandLine.new(command, '').run
+    Cocaine::CommandLine.new(command, '', logger: Logger.new(STDOUT)).run
   end
 
   def build_laptop_script

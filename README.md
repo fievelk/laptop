@@ -1,20 +1,15 @@
 Laptop
 ======
 
-Laptop is a script to set up an OS X or Linux laptop for Rails development.
+### ToDo:
+
+- Remove all Mac OS traces
+- Test
+
+Laptop (forked by fievelk) is a script to set up a Linux laptop for Rails development.
 
 Requirements
 ------------
-
-### OS X
-
-We support:
-
-* [OS X Mavericks (10.9)](https://itunes.apple.com/us/app/os-x-mavericks/id675248567)
-* OS X Yosemite (10.10)
-
-Older versions may work but aren't regularly tested. Bug reports for older
-versions are welcome.
 
 ### Linux
 
@@ -27,12 +22,6 @@ We support:
 
 Install
 -------
-
-### OS X
-
-Read, then run the script:
-
-    bash <(curl -s https://raw.githubusercontent.com/thoughtbot/laptop/master/mac) 2>&1 | tee ~/laptop.log
 
 ### Linux
 

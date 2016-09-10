@@ -26,7 +26,9 @@ class Distro
 
   def prepare
     run_vagrant_ssh_command('sudo aptitude update')
-    run_vagrant_ssh_command('sudo aptitude dist-upgrade -y')
+    # not_interactive = '-o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"'
+    run_vagrant_ssh_command('sudo DEBIAN_FRONTEND=noninteractive aptitude dist-upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"')
+    # run_vagrant_ssh_command("sudo aptitude dist-upgrade -y #{not_interactive}")
   end
 
   def setup_laptop
@@ -97,7 +99,8 @@ class Distro
   end
 
   def run_command(command)
-   #  Cocaine::CommandLine.new(command, '', :logger => Logger.new(STDOUT)).run
-    Cocaine::CommandLine.new(command, '').run
+    Cocaine::CommandLine.logger = Logger.new(STDOUT)
+    Cocaine::CommandLine.new(command, '', :logger => Logger.new(STDOUT)).run
+    # Cocaine::CommandLine.new(command, '').run
   end
 end
