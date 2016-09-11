@@ -19,4 +19,7 @@ if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
   fancy_echo "Installing ruby-build, to install Rubies ..."
     git clone https://github.com/sstephenson/ruby-build.git \
       ~/.rbenv/plugins/ruby-build
+else
+  fancy_echo "Updating ruby-build repository to install latest ruby version ..."
+  git --git-dir=/home/vagrant/.rbenv/plugins/ruby-build/.git pull
 fi
