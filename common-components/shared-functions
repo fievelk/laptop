@@ -1,6 +1,17 @@
-fancy_echo() {
-  printf "\n%b\n" "$1"
-}
+# Use colored output
+if [ $# -gt 0 ]; then
+  if [ "$1" = "--colored-output" ]; then
+    fancy_echo() {
+      blue=$(tput setaf 4)
+      normal=$(tput sgr0)
+      printf "\n%b\n" "${blue}$1${normal}"
+    }
+  fi
+else
+  fancy_echo() {
+    printf "\n%b\n" "$1"
+  }
+fi
 
 append_to_zshrc() {
   local text="$1" zshrc
