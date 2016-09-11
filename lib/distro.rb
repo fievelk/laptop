@@ -26,9 +26,14 @@ class Distro
 
   def prepare
     run_vagrant_ssh_command('sudo aptitude update')
-    # not_interactive = '-o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"'
+    # $ dpkg --force-help
+    # [!] confold         Always use the old config files, don't prompt
+    # [!] confdef         Use the default option for new config files if one is
+    #                     available, don't prompt. If no default can be found,
+    #                     you will be prompted unless one of the confold or
+    #                     confnew options is also given
     run_vagrant_ssh_command('sudo DEBIAN_FRONTEND=noninteractive aptitude dist-upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"')
-    # run_vagrant_ssh_command("sudo aptitude dist-upgrade -y #{not_interactive}")
+    # run_vagrant_ssh_command("sudo aptitude dist-upgrade -y")
   end
 
   def setup_laptop
