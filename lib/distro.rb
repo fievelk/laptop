@@ -1,5 +1,7 @@
+require 'byebug'
+
 class Distro
-  attr_reader :vagrantfile, :basename, :virtualbox_name, :rendered_box_name
+  attr_reader :vagrantfile, :basename, :virtualbox_name, :rendered_box_name, :packaging_tool
 
   def initialize(vagrantfile)
     @vagrantfile = vagrantfile
@@ -25,19 +27,31 @@ class Distro
   end
 
   def prepare
-    run_vagrant_ssh_command('sudo aptitude update')
+    # @packaging_tool ||= packaging_tool
+
+    run_vagrant_ssh_command("sudo #{packaging_tool} update")
     # $ dpkg --force-help
     # [!] confold         Always use the old config files, don't prompt
     # [!] confdef         Use the default option for new config files if one is
     #                     available, don't prompt. If no default can be found,
     #                     you will be prompted unless one of the confold or
     #                     confnew options is also given
-    run_vagrant_ssh_command('sudo DEBIAN_FRONTEND=noninteractive aptitude dist-upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"')
-    # run_vagrant_ssh_command("sudo aptitude dist-upgrade -y")
+    run_vagrant_ssh_command("sudo DEBIAN_FRONTEND=noninteractive #{packaging_tool} dist-upgrade -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'")
   end
 
-  def setup_laptop
-    run_vagrant_ssh_command('echo vagrant | bash /vagrant/linux')
+  def install_rails
+    run_vagrant_ssh_command("gem install rails")
+  end
+
+  def set_dns
+    run_vagrant_ssh_command('echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null')
+  end
+
+  def setup_laptop(colored_output = true)
+    colored = colored_output ? '--colored-output' : ''
+    run_vagrant_ssh_command("echo vagrant | bash /vagrant/linux #{colored}")
+    puts "Installing rails gem"
+    install_rails
   end
 
   def active_shell
@@ -66,17 +80,10 @@ class Distro
     )
   end
 
-  def silver_searcher_test
-    run_vagrant_ssh_command('command -v ag')
-  end
-
-  def gh_test
-    run_vagrant_ssh_command('command -v gh')
-  end
-
   def package
     run_vagrant_ssh_command('rm -Rf ~/test_app')
-    run_vagrant_ssh_command('sudo aptitude clean')
+    # run_vagrant_ssh_command('sudo aptitude clean')
+    run_vagrant_ssh_command("sudo #{packaging_tool} clean")
 
     run_command(
       %Q|vagrant package --base "#{virtualbox_name}" --output "#{rendered_box_name}"|
@@ -85,6 +92,12 @@ class Distro
 
   def packaged?
     File.exists?(rendered_box_name)
+  end
+
+  def allow_change_shell_without_pwd
+    regex = %Q("/sufficient\\spam_rootok.so/c\\auth        sufficient  pam_permit.so")
+    run_vagrant_ssh_command("sudo sed -i #{regex} /etc/pam.d/chsh")
+    # run_vagrant_ssh_command('sudo sed -i "/sufficient\\spam_rootok.so/c\auth        sufficient  pam_permit.so" /etc/pam.d/chsh')
   end
 
   private
@@ -107,5 +120,16 @@ class Distro
     Cocaine::CommandLine.logger = Logger.new(STDOUT)
     Cocaine::CommandLine.new(command, '', :logger => Logger.new(STDOUT)).run
     # Cocaine::CommandLine.new(command, '').run
+  end
+
+  def packaging_tool
+    @packaging_tool ||= begin
+      run_vagrant_ssh_command('which aptitude')
+    rescue Cocaine::ExitStatusError
+      puts "This VM is not using aptitude yet. Switching to apt-get for the moment."
+      'apt-get'
+    else
+      'aptitude'
+    end
   end
 end

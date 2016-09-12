@@ -19,6 +19,14 @@ describe 'Laptop applied to a vagrant box' do
       distro.reset
       distro.prepare
 
+      if distro.basename == 'ubuntu-16-04'
+      # These commands are intended for ubuntu/xenial64.
+      # They should be refactored to be more abstract.
+        distro.set_dns
+        distro.allow_change_shell_without_pwd
+        # distro.install_rails # Install system gem only for vagrant test
+      end
+
       puts "Setting up laptop"
 
       expect { distro.setup_laptop }.not_to raise_error
@@ -30,8 +38,6 @@ describe 'Laptop applied to a vagrant box' do
       expect { distro.generate_rails_app }.not_to raise_error
       expect { distro.scaffold_and_model_generation }.not_to raise_error
       expect { distro.database_migration }.not_to raise_error
-      expect { distro.silver_searcher_test }.not_to raise_error
-      expect { distro.gh_test }.not_to raise_error
 
       puts "Packaging box for distribution"
 
