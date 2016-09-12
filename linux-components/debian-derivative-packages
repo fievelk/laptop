@@ -39,3 +39,6 @@ fancy_echo "Installing zsh ..."
 
 fancy_echo "Installing node, to render the rails asset pipeline ..."
   sudo aptitude install -y nodejs
+
+fancy_echo "Installing build-essentials, to build and install ruby with rbenv ..."
+  sudo aptitude install -y build-essential
