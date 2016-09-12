@@ -1,0 +1,9 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  name = 'ubuntu-16-04'
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.name = "#{name}"
+  end
+end
