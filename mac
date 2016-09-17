@@ -1,6 +1,17 @@
-fancy_echo() {
-  printf "\n%b\n" "$1"
-}
+# Use colored output
+if [ $# -gt 0 ]; then
+  if [ "$1" = "--colored-output" ]; then
+    fancy_echo() {
+      blue=$(tput setaf 4)
+      normal=$(tput sgr0)
+      printf "\n%b\n" "${blue}$1${normal}"
+    }
+  fi
+else
+  fancy_echo() {
+    printf "\n%b\n" "$1"
+  }
+fi
 
 append_to_zshrc() {
   local text="$1" zshrc
@@ -188,6 +199,9 @@ if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
   fancy_echo "Installing ruby-build, to install Rubies ..."
     git clone https://github.com/sstephenson/ruby-build.git \
       ~/.rbenv/plugins/ruby-build
+else
+  fancy_echo "Updating ruby-build repository to install latest ruby version ..."
+  git --git-dir=$HOME/.rbenv/plugins/ruby-build/.git pull
 fi
 ### end common-components/rbenv
 
