@@ -7,7 +7,4 @@ linux-components/distro-check
 linux-components/debian-package-update
 linux-components/debian-derivative-packages
 common-components/zsh
-common-components/rbenv
-common-components/ruby-environment
-linux-components/bundler
 common-components/personal-additions
