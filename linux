@@ -97,13 +97,32 @@ fancy_echo "Installing zsh ..."
 
 ### end linux-components/debian-derivative-packages
 
+# Docker installation
+
+sudo aptitude install \
+    apt-transport-https \
+    ca-certificates \
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo aptitude update
+sudo aptitude install docker-ce
+
+### end common-components/docker
+
 fancy_echo "Changing your shell to zsh ..."
   chsh -s $(which zsh)
 
 ### end common-components/zsh
 
 fancy_echo "Installing antigen for zsh ..."
-apt-get install -y zsh-antigen
+sudo aptitude install -y zsh-antigen
 
 ### end common-components/antigen
 

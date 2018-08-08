@@ -5,6 +5,7 @@ common-components/exit-trap
 linux-components/distro-check
 linux-components/debian-package-update
 linux-components/debian-derivative-packages
+common-components/docker
 common-components/zsh
 common-components/antigen
 common-components/personal-additions
