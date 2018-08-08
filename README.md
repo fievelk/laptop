@@ -26,7 +26,7 @@ Install
 
 Read, then run the script:
 
-    bash <(wget -qO- https://raw.githubusercontent.com/thoughtbot/laptop/master/linux) 2>&1 | tee ~/laptop.log
+    bash <(wget -qO- https://raw.githubusercontent.com/fievelk/laptop/ppp/linux/linux) 2>&1 | tee ~/laptop.log
 
 Debugging
 ---------
