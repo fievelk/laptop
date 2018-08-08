@@ -1,0 +1,2 @@
+fancy_echo "Installing antigen for zsh ..."
+apt-get install -y zsh-antigen

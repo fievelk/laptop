@@ -102,6 +102,11 @@ fancy_echo "Changing your shell to zsh ..."
 
 ### end common-components/zsh
 
+fancy_echo "Installing antigen for zsh ..."
+apt-get install -y zsh-antigen
+
+### end common-components/antigen
+
 fancy_echo "Installing your personal additions from ~/.laptop.local ..."
   if [[ -f ~/.laptop.local ]]; then
     source ~/.laptop.local
