@@ -11,6 +11,6 @@ for MANIFEST in Manifest.*; do
 
     cat "$file" >> "$FILENAME"
 
-    printf "### end $file\n\n" >> "$FILENAME"
+    printf "\n### end $file\n\n" >> "$FILENAME"
   done < "$MANIFEST"
 done
