@@ -1,6 +1,6 @@
 # Docker installation
 
-sudo aptitude install \
+sudo aptitude install -y \
     apt-transport-https \
     ca-certificates \
     software-properties-common
@@ -13,4 +13,4 @@ sudo add-apt-repository \
    stable"
 
 sudo aptitude update
-sudo aptitude install docker-ce
+sudo aptitude install -y docker-ce
