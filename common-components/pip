@@ -1,0 +1,2 @@
+sudo aptitude install -y python-pip
+pip install --upgrade pip

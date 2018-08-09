@@ -21,3 +21,6 @@ fancy_echo "Installing curl ..."
 
 fancy_echo "Installing zsh ..."
   sudo aptitude install -y zsh
+
+fancy_echo "Installing python3-dev ..."
+  sudo apt-get install python3-dev

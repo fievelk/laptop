@@ -95,11 +95,14 @@ fancy_echo "Installing curl ..."
 fancy_echo "Installing zsh ..."
   sudo aptitude install -y zsh
 
+fancy_echo "Installing python3-dev ..."
+  sudo apt-get install python3-dev
+
 ### end linux-components/debian-derivative-packages
 
 # Docker installation
 
-sudo aptitude install \
+sudo aptitude install -y \
     apt-transport-https \
     ca-certificates \
     software-properties-common
@@ -112,9 +115,14 @@ sudo add-apt-repository \
    stable"
 
 sudo aptitude update
-sudo aptitude install docker-ce
+sudo aptitude install -y docker-ce
 
 ### end common-components/docker
+
+sudo aptitude install -y python-pip
+pip install --upgrade pip
+
+### end common-components/pip
 
 fancy_echo "Changing your shell to zsh ..."
   chsh -s $(which zsh)
