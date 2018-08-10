@@ -9,4 +9,5 @@ common-components/docker
 common-components/pip
 common-components/zsh
 common-components/antigen
+common-components/vim-plug
 common-components/personal-additions
