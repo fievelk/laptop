@@ -96,10 +96,10 @@ fancy_echo "Installing zsh ..."
   sudo aptitude install -y zsh
 
 fancy_echo "Installing python3-dev ..."
-  sudo apt-get install python3-dev
+  sudo aptitude install -y python3-dev
 
 fancy_echo "Installing ag search with silversearcher ..."
-  sudo apt-get install silversearcher-ag
+  sudo aptitude install -y silversearcher-ag
 
 ### end linux-components/debian-derivative-packages
 
