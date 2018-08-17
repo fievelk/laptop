@@ -7,6 +7,7 @@ linux-components/debian-package-update
 linux-components/debian-derivative-packages
 common-components/docker
 common-components/pip
+common-components/pylint
 common-components/zsh
 common-components/antigen
 common-components/vim-plug

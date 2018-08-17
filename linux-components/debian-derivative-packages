@@ -27,3 +27,6 @@ fancy_echo "Installing python3-dev ..."
 
 fancy_echo "Installing ag search with silversearcher ..."
   sudo aptitude install -y silversearcher-ag
+
+fancy_echo "Installing CTAGS ..."
+  sudo apt-get -y install ctags

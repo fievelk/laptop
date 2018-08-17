@@ -101,6 +101,9 @@ fancy_echo "Installing python3-dev ..."
 fancy_echo "Installing ag search with silversearcher ..."
   sudo aptitude install -y silversearcher-ag
 
+fancy_echo "Installing CTAGS ..."
+  sudo apt-get -y install ctags
+
 ### end linux-components/debian-derivative-packages
 
 # Docker installation
@@ -126,6 +129,11 @@ sudo aptitude install -y python-pip
 pip install --upgrade pip
 
 ### end common-components/pip
+
+sudo apt-get install -y pylint
+
+
+### end common-components/pylint
 
 fancy_echo "Changing your shell to zsh ..."
   chsh -s $(which zsh)
